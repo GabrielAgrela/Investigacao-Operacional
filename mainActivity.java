@@ -3,7 +3,7 @@ import java.util.Collections;
 
 class Main 
 {
-	//everything is a global Var by now
+  
     static float simpelx[][]=new float[3][5];
     static float choosePivot[]=new float[2];
     static float divLines[]=new float[3];
@@ -114,7 +114,7 @@ class Main
   }
   public static void main(String[] args) 
   {
-	//Temporarily declaring restrictions
+    //Temporarily declaring restrictions
     simpelx[0][0]=20;
     simpelx[0][1]=2;
     simpelx[0][2]=4;
@@ -130,13 +130,11 @@ class Main
     simpelx[2][2]=-2;
     simpelx[2][3]=0;
     simpelx[2][4]=0;
-	
     Simplex();
-	
     //If lowest value is negative then we will repeat last methods
     if(simpelx[simpelx.length-1][posMinFinal]<0)
     {
-      System.out.println("\nrepete a parte de cima");
+      System.out.println("\nRepete a parte de cima");
       Simplex();
     }
     
