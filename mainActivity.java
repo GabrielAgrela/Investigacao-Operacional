@@ -1,6 +1,14 @@
 import java.util.Arrays;
 import java.util.Collections;
 
+//Uncomment Println's to help understand the code
+
+//-----TODO-----
+//Add dynamism (float[3][5] is static for now for example)
+//Test this better
+//This is for Max function only, implement Min
+//Pos-Analise (change function values w/o re-doing it all again)
+//--------------
 class Main 
 {
   
@@ -11,7 +19,6 @@ class Main
     static int negPos=0;
     static int posMinFinal = 0;
 
-  
   public static void Simplex() 
   {
     //Find min in z
@@ -98,7 +105,6 @@ class Main
     }
     
     //Finding the lowest value (only used if it's negative)
-
     float minFinal = simpelx[simpelx.length-1][0];
     for (int i=0;i<simpelx[simpelx.length-1].length;i++)
     {
@@ -131,6 +137,7 @@ class Main
     simpelx[2][3]=0;
     simpelx[2][4]=0;
     Simplex();
+    
     //If lowest value is negative then we will repeat last methods
     if(simpelx[simpelx.length-1][posMinFinal]<0)
     {
@@ -138,9 +145,5 @@ class Main
       Simplex();
     }
     
-
-    
-    
-}
-  
+  }
 }
