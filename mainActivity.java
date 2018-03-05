@@ -12,7 +12,7 @@ import java.util.Collections;
 class Main 
 {
   
-    static float simpelx[][]=new float[3][5];
+    static float simplex[][]=new float[3][5];
     static float choosePivot[]=new float[2];
     static float divLines[]=new float[3];
     static int PivotPos[]=new int[2];
@@ -22,13 +22,13 @@ class Main
   public static void Simplex() 
   {
     //Find min in z
-    float min = simpelx[2][0];
+    float min = simplex[2][0];
     int pos=0;
-    for (int j=simpelx.length-1; j > -1; j--) 
+    for (int j=simplex.length-1; j > -1; j--) 
     {
-        if (simpelx[2][j] < min) 
+        if (simplex[2][j] < min) 
         { 
-            min = simpelx[2][j];
+            min = simplex[2][j];
             pos=j;
         }
     }
@@ -37,9 +37,9 @@ class Main
     //Finding pivot (< first collumn / min value in z)
     for (int i=0;i<2;i++)
     {
-      choosePivot[i]=simpelx[i][0]/simpelx[i][pos];
+      choosePivot[i]=simplex[i][0]/simplex[i][pos];
       PivotPos[i]=i;
-      //System.out.println(simpelx[i][0]/simpelx[i][pos]);
+      //System.out.println(simplex[i][0]/simplex[i][pos]);
     }
     
     //Saving both the Pivot value and position
@@ -59,30 +59,30 @@ class Main
     
     //Gauss law (finding by which ammount i should divide/multiply by, and saving them in an array)
     int x=0;
-    for (int i=0;i<simpelx.length;i++)
+    for (int i=0;i<simplex.length;i++)
     {
       if (i != PivotPos[posPivot])
         {
           
-          divLines[x]=-1*(simpelx[i][pos])/simpelx[PivotPos[posPivot]][pos];
+          divLines[x]=-1*(simplex[i][pos])/simplex[PivotPos[posPivot]][pos];
           //System.out.println(divLines[x]);
           x++;
         }
     }
-    divLines[x]=1/simpelx[PivotPos[posPivot]][pos];
+    divLines[x]=1/simplex[PivotPos[posPivot]][pos];
     
     //Gauss law (Using previous array to execute law)
-    for (int i=0;i<simpelx[0].length;i++)
+    for (int i=0;i<simplex[0].length;i++)
     {
       System.out.print("\n");
-      for (int j=0;j<simpelx.length;j++)
+      for (int j=0;j<simplex.length;j++)
       {
         if (j != PivotPos[posPivot])
         {
           if(j==0)
-            simpelx[j][i]=simpelx[j][i]+divLines[j]*simpelx[PivotPos[posPivot]][i];
+            simplex[j][i]=simplex[j][i]+divLines[j]*simplex[PivotPos[posPivot]][i];
             else
-              simpelx[j][i]=simpelx[j][i]+divLines[j-1]*simpelx[PivotPos[posPivot]][i];
+              simplex[j][i]=simplex[j][i]+divLines[j-1]*simplex[PivotPos[posPivot]][i];
 
         }
           
@@ -90,10 +90,10 @@ class Main
     }
     
     //Fixing pivot to 1 (and his row)
-    float temp=(1/simpelx[PivotPos[posPivot]][pos]);//Had to do this here, wasn't working when i made the calculation all toghether down there (classic java hehe)
-    for (int i=0;i<simpelx[PivotPos[posPivot]].length;i++)
+    float temp=(1/simplex[PivotPos[posPivot]][pos]);//Had to do this here, wasn't working when i made the calculation all toghether down there (classic java hehe)
+    for (int i=0;i<simplex[PivotPos[posPivot]].length;i++)
     {
-      simpelx[PivotPos[posPivot]][i]=temp*simpelx[PivotPos[posPivot]][i];
+      simplex[PivotPos[posPivot]][i]=temp*simplex[PivotPos[posPivot]][i];
     }
     
     //Show Simplex table
@@ -101,18 +101,18 @@ class Main
     {
       System.out.print("\n ");
       for(int j=0;j<5;j++)
-       System.out.print(simpelx[i][j]+" ");
+       System.out.print(simplex[i][j]+" ");
     }
     
     //Finding the lowest value (only used if it's negative)
-    float minFinal = simpelx[simpelx.length-1][0];
-    for (int i=0;i<simpelx[simpelx.length-1].length;i++)
+    float minFinal = simplex[simplex.length-1][0];
+    for (int i=0;i<simplex[simplex.length-1].length;i++)
     {
-      if (simpelx[simpelx.length-1][i] < minFinal) 
+      if (simplex[simplex.length-1][i] < minFinal) 
         {  
           
             posMinFinal=i;
-            minFinal = simpelx[simpelx.length-1][i];
+            minFinal = simplex[simplex.length-1][i];
   
         }
     }
@@ -121,25 +121,35 @@ class Main
   public static void main(String[] args) 
   {
     //Temporarily declaring restrictions
-    simpelx[0][0]=20;
-    simpelx[0][1]=2;
-    simpelx[0][2]=4;
-    simpelx[0][3]=1;
-    simpelx[0][4]=0;
-    simpelx[1][0]=45;
-    simpelx[1][1]=5;
-    simpelx[1][2]=2;
-    simpelx[1][3]=0;
-    simpelx[1][4]=1;
-    simpelx[2][0]=0;
-    simpelx[2][1]=-2;
-    simpelx[2][2]=-2;
-    simpelx[2][3]=0;
-    simpelx[2][4]=0;
+    simplex[0][0]=20;
+    simplex[0][1]=2;
+    simplex[0][2]=4;
+    simplex[0][3]=1;
+    simplex[0][4]=0;
+    simplex[1][0]=45;
+    simplex[1][1]=5;
+    simplex[1][2]=2;
+    simplex[1][3]=0;
+    simplex[1][4]=1;
+    simplex[2][0]=0;
+    simplex[2][1]=-2;
+    simplex[2][2]=-2;
+    simplex[2][3]=0;
+    simplex[2][4]=0;
+    
+    //Show Simplex table
+    for (int i=0;i<3;i++)
+    {
+      System.out.print("\n ");
+      for(int j=0;j<5;j++)
+       System.out.print(simplex[i][j]+" ");
+    }
+    
     Simplex();
     
+
     //If lowest value is negative then we will repeat last methods
-    if(simpelx[simpelx.length-1][posMinFinal]<0)
+    if(simplex[simplex.length-1][posMinFinal]<0)
     {
       System.out.println("\nRepete a parte de cima");
       Simplex();
