@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Scanner;
 
 //Uncomment Println's to help understand the code
 
@@ -11,11 +12,12 @@ import java.util.Collections;
 //--------------
 class Main 
 {
-  
-    static float simplex[][]=new float[3][5];
-    static float choosePivot[]=new float[2];
-    static float divLines[]=new float[3];
-    static int PivotPos[]=new int[2];
+    static int rows=3;
+    static int collumns=5;
+    static float simplex[][]=new float[rows][collumns];
+    static float choosePivot[]=new float[rows-1];
+    static float divLines[]=new float[rows];
+    static int PivotPos[]=new int[rows-1];
     static int negPos=0;
     static int posMinFinal = 0;
 
@@ -136,12 +138,18 @@ class Main
     simplex[2][2]=-2;
     simplex[2][3]=0;
     simplex[2][4]=0;
+
+    Scanner reader = new Scanner(System.in);
+    System.out.println("Enter number of rows: (3)");
+    rows = reader.nextInt();
+    System.out.println("Enter number of collumns: (5)");
+    collumns = reader.nextInt();
     
     //Show Simplex table
-    for (int i=0;i<3;i++)
+    for (int i=0;i<rows;i++)
     {
       System.out.print("\n ");
-      for(int j=0;j<5;j++)
+      for(int j=0;j<collumns;j++)
        System.out.print(simplex[i][j]+" ");
     }
     
