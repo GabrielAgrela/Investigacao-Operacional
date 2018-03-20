@@ -41,21 +41,31 @@ class Main
     //Find min in z
     float min = simplex[rows-1][0];
     int pos=0;
-    for (int j=simplex.length-1; j > -1; j--) 
+    for (int j=simplex[rows-1].length-1; j > -1; j--) 
     {
-        if (simplex[rows-1][j] < min) 
+     // System.out.println("\nposis:"+simplex[rows-1][j]+" ");
+        if (simplex[rows-1][j] > min) 
         { 
             min = simplex[rows-1][j];
             pos=j;
         }
     }
-   // System.out.println("\nmin:"+min+" pos: "+pos);
+    //System.out.println("\nmax:"+min+" pos: "+pos);
+    if (min==0)
+      {
+         System.exit(1);
+      }
     
     //Finding pivot (< first collumn / min value in z)
     for (int i=0;i<rows-1;i++)
     {
-      choosePivot[i]=simplex[i][0]/simplex[i][pos];
+      if(simplex[i][0]==0)
+        choosePivot[i]=0;
+      else{
+         choosePivot[i]=simplex[i][0]/simplex[i][pos];
       PivotPos[i]=i;
+      }
+     
      // System.out.println(simplex[i][0]/simplex[i][pos]);
     }
     
@@ -64,15 +74,15 @@ class Main
     int posPivot=0;
     for (int j=0; j < choosePivot.length; j++)
     {
-      
-        if (choosePivot[j] < minPivot) 
+      //System.out.println(" "+choosePivot[j]);
+        if (choosePivot[j] < minPivot && choosePivot[j]>0) 
         {  
-          //System.out.println(choosePivot[j]);
+            System.out.println(choosePivot[j]);
             minPivot = choosePivot[j];
             posPivot=j;
         }
     }
-   // System.out.println("\nmin:"+minPivot+" pos: "+PivotPos[posPivot]);
+    //System.out.println("\nmax:"+minPivot+" pos: "+PivotPos[posPivot]);
     
     //Gauss law (finding by which ammount i should divide/multiply by, and saving them in an array)
     int x=0;
@@ -125,7 +135,7 @@ class Main
     float minFinal = simplex[simplex.length-1][0];
     for (int i=0;i<simplex[simplex.length-1].length;i++)
     {
-      if (simplex[simplex.length-1][i] < minFinal) 
+      if (simplex[simplex.length-1][i] > minFinal) 
         {  
           
             posMinFinal=i;
@@ -167,7 +177,7 @@ class Main
           else if(j<=maxx)
           {
             System.out.println("enter X"+(j+1)+" from "+(i+1)+"º restriction:");
-            tempsimplex[i][j] = reader.nextInt();
+            tempsimplex[i][j] = reader.nextInt()*-1;
           }
         }
       }
@@ -194,7 +204,7 @@ class Main
     {
       for (int j = 0; j < maxx+1;j++)
       {
-        temptempsimplex[i][j]=tempsimplex[j][i];
+        temptempsimplex[i][j]=tempsimplex[i][j];
       }
     }
     for (int i = 0; i < nrestrictions+1;i++)
@@ -212,13 +222,14 @@ class Main
       }
     }
     
+    
     //Show Simplex table
-    for (int i=0;i<nrestrictions+1;i++)
+    /*for (int i=0;i<nrestrictions+1;i++)
     {
       System.out.print("\n ");
       for(int j=0;j<maxx+1;j++)
        System.out.print(temptemptempsimplex[i][j]+" ");
-    }
+    }*/
     
     
     
@@ -334,10 +345,13 @@ class Main
     
 
     //If lowest value is negative then we will repeat last methods
-    if(simplex[simplex.length-1][posMinFinal]<0)
+
+    if(simplex[simplex.length-1][posMinFinal]>0)
     {
-      System.out.println("\nRepete a parte de cima");
+      System.out.println("\nRepete a parte de cima"+simplex[simplex.length-1][posMinFinal]);
       Simplex();
+
+      
     }
     
   }
