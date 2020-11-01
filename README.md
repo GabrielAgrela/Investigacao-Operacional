@@ -1,2 +1,3 @@
-# operational investigation subject (Computer Engeneering)
-Simplex method solving in Java
+
+# Simplex method solving in Java
+Operational Investigation Subject (Computer Engeneering)
